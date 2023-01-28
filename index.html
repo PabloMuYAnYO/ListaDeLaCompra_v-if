@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/style.css">
+    <title>Lista de la compra avanzada 4</title>
+</head>
+<body>
+    <section id="principal">
+        <div id="mi_app">
+            <header>
+                 <h1>{{titulo || 'Bienvenid@'}}</h1> <!-- Si el titulo esta vacio pinta Bienvenid@ -->
+                 <hr>
+                 <button class="rojo" v-if="edit==true" @click="editando(false)">Cancelar edición</button>
+                 <button id="abrir" class="verde" v-else @click="editando(true)">Añadir elemento</button>
+            </header>
+            <div v-if="edit==true">
+                <input type="text" v-model="texto" @keyup.enter="guardarElemento">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button class="verde" @click="guardarElemento">Añadir</button>
+                    <button class="rojo" @click="eliminarUltElemento" v-if="lista.length > 0">Eliminar último</button>                
+                </div>
+                <br><br>
+                <hr>
+                <div id="lista">
+                    <div id="elementos">
+
+                    </div>
+                    <ul>
+                        <li :class="{tachado: elemento.tachado == true}" v-for="elemento in listaOrdenada" @click="tachado(elemento)">{{elemento.cosa}}</li> <!--  bindeamos :class con los dos puntos -->
+                    </ul>
+                </div>
+                    <p v-if="lista.length === 0"><strong>No hay elementos en la lista</strong></p>
+
+            </div>
+
+        </div>
+    </section>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="./scripts/script.js"></script>
+</body>
+</html>
